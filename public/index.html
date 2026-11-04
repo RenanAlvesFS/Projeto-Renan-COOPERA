@@ -1,0 +1,45 @@
+<!doctype html>
+<!-- lang="pt-BR": leitores de tela e o corretor do navegador usam português -->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <!-- Faz a página se ajustar à largura do celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medidor Coopera</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Medidor Coopera</h1>
+
+    <!-- FORMULÁRIO: usar <form> dá de graça o Enter para enviar,
+         o "required" e a checagem de min/max do navegador. -->
+    <form id="form-aparelho">
+      <!-- O <label> envolvendo o input: clicar no texto foca o campo
+           e o leitor de tela anuncia o nome do campo. -->
+      <label>Aparelho <input id="nome" required placeholder="Geladeira"></label>
+      <label>Potência (W) <input id="potencia" type="number" min="1" max="10000" required></label>
+      <!-- step="0.1": sem isso o navegador recusa 0,5 h (meia hora de banho) -->
+      <label>Horas por dia <input id="horas" type="number" min="0" max="24" step="0.1" required></label>
+      <label>Dias no mês <input id="dias" type="number" min="1" max="31" value="30" required></label>
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- Lista VAZIA de propósito: quem preenche é o JavaScript. -->
+    <ul id="lista-aparelhos"></ul>
+
+    <!-- type="button" e FORA do form: se fosse submit, recarregaria a página. -->
+    <button id="btn-simular" type="button">Simular</button>
+
+    <!-- hidden = começa escondido. O JS mostra com erroEl.hidden = false. -->
+    <p id="erro" class="erro" hidden></p>
+
+    <!-- Área onde o JS desenha o resultado vindo do servidor. -->
+    <section id="resultado"></section>
+  </main>
+
+  <!-- Script no FIM do body: quando ele roda, os elementos acima já existem.
+       No <head>, o querySelector devolveria null. -->
+  <script src="app.js"></script>
+</body>
+</html>
